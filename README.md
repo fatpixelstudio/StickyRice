@@ -1,0 +1,2 @@
+# StickyRice
+Wordpress starter kit
