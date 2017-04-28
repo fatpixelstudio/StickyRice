@@ -9,11 +9,9 @@
 		)); ?>
 		<a href="#page-top" class="nav-main-toggle nav-main-toggle--close js-nav-main-hide">Terug naar boven</a>
 	</nav>
-	<div class="footer contain-padding">
-		<footer role="contentinfo" class="contentinfo copy">
-			<p>&copy; Fat Pixel</p>
-		</footer>
-	</div>
+	<footer role="contentinfo" class="contentinfo copy">
+		<p>&copy; Fat Pixel</p>
+	</footer>
 
 	<?php wp_footer(); ?>
 
