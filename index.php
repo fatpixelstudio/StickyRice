@@ -18,7 +18,7 @@
 					<h1 class="article-title">
 						<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 					</h1>
-					<div class="Copy">
+					<div class="copy">
 						<?php the_excerpt(); ?>
 					</div>
 					<p class="article-readmore">
