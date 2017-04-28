@@ -9,4 +9,10 @@ function stickyrice_flush_rewrite_rules() {
 	flush_rewrite_rules();
 }
 
+/**
+ * Add your custom post types and taxonomies here
+ * Use a tool like https://generatewp.com/ to generate the code, or write your
+ * own if you're feeling lucky
+ */
+
 ?>
