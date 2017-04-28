@@ -1,5 +1,6 @@
 <?php
 // Theme name / location
+// Put the exact foldername of your theme in here
 $theme_location = 'stickyrice';
 
 // Assets (dev vs. min+hash)
@@ -8,8 +9,14 @@ $theme_location = 'stickyrice';
 $assets_css = $_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/' . $theme_location . '/assets/stylesheets/min/hash.css.json';
 $assets_js = $_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/' . $theme_location . '/assets/javascript/min/hash.js.json';
 
-$cssobj = json_decode(file_get_contents($assets_css));
-$jsobj = json_decode(file_get_contents($assets_js));
+if(file_exists($assets_css) == false || file_exists($assets_js) == false) {
+	echo '<p><strong>Watch out!</strong> StickyRice couldn\'t find your JSON hash files for CSS or JS. Did you include an assets folder?</p>';
+	exit();
+}
+else {
+	$cssobj = json_decode(file_get_contents($assets_css));
+	$jsobj = json_decode(file_get_contents($assets_js));
+}
 
 if(strpos($_SERVER['SERVER_NAME'],'local.') !== false || strpos($_SERVER['SERVER_NAME'],'staging.domain.dev') !== false):
 	$env_suffix = 'dev';
@@ -34,7 +41,7 @@ global $criticalcss; // Set as global, if defined in page template
 $criticalcss = (isset($criticalcss)) ? $criticalcss : 'default';
 
 // Mobile detect
-require_once $_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/' . $theme_location . '/library/Mobile_Detect.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/' . $theme_location . '/lib/Mobile_Detect.php';
 $detect = new Mobile_Detect;
 $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'mobile') : 'computer');
 

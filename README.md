@@ -8,11 +8,15 @@ It's a very minimal theme, and is suited for the developer that wants to build f
 
 StickyRice assumes that you'll use stylesheets, javascript and other assets like in the (https://github.com/jolantis/altair)[Altair] starterkit.
 
-Classes on HTML elements are all in BEM notation.
+If you install this theme and find yourself baffled by the **StickyRice couldn't find your JSON hash files for CSS or JS** warning, it means that the CSS and JS assets (of Altair) couldn't be found.
+
+Classes on HTML elements are all in BEM notation. Javascript classes always start with ``js-``
 
 ## Header and footer
 
-This starter kit also assumes you'll be using some sort of critical css and an asynchronous style and script loader like (https://github.com/filamentgroup/enhance)[Enhance]. The header.php and footer.php reflect that. If you're planning to use regular ``<link>`` and ``<script>`` tags loading these assets, feel free to do so!
+This starter kit also assumes you'll be using some sort of critical css and an asynchronous style and script loader like (https://github.com/filamentgroup/enhance)[Enhance]. The header.php and footer.php reflect that. 
+
+If you're planning to use regular ``<link>`` and ``<script>`` tags loading these assets, feel free to do so! But you'll have to really dig into the header.php and the way it works.
 
 ## Recommended plugins
 
