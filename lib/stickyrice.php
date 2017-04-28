@@ -197,7 +197,7 @@ function stickyrice_theme_support() {
 	register_nav_menus(
 		array(
 			'main-nav' => __( 'Hoofdmenu', 'stickyricetheme' ),   // main nav in header
-			'func-nav' => __( 'Copyright menu', 'stickyricetheme' ),   // main nav in header
+			'func-nav' => __( 'Secondair menu', 'stickyricetheme' ),   // main nav in header
 			// 'foot-nav' => __( 'Footermenu', 'stickyricetheme' ),   // main nav in header
 		)
 	);
