@@ -30,7 +30,7 @@
 
 		<?php endwhile; ?>
 
-			<?php bones_page_navi(); ?>
+			<?php stickyrice_page_navi(); ?>
 
 		<?php else : ?>
 
