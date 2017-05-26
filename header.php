@@ -10,7 +10,7 @@ $assets_css = $_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/' . $theme_locatio
 $assets_js = $_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/' . $theme_location . '/assets/javascript/min/hash.js.json';
 
 if(file_exists($assets_css) == false || file_exists($assets_js) == false) {
-	echo '<p><strong>Watch out!</strong> StickyRice couldn\'t find your JSON hash files for CSS or JS. Did you include an assets folder?</p>';
+	echo '<p><strong>Watch out!</strong> StickyRice couldn\'t find your JSON hash files for CSS or JS.</p><ul><li>Did you include an assets folder?</li><li>Did you check header.php with the correct theme settings?</li></ul>';
 	exit();
 }
 else {
