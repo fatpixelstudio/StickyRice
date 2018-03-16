@@ -3,33 +3,10 @@
 // Put the exact foldername of your theme in here
 $theme_location = 'stickyrice';
 
-// Assets (dev vs. min+hash)
-// Your site should live on it's own domain and should have file_get_contents
-// enabled to read the JSON file.
-$assets_css = $_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/' . $theme_location . '/assets/stylesheets/min/hash.css.json';
-$assets_js = $_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/' . $theme_location . '/assets/javascript/min/hash.js.json';
-
-if(file_exists($assets_css) == false || file_exists($assets_js) == false) {
-	echo '<p><strong>Watch out!</strong> StickyRice couldn\'t find your JSON hash files for CSS or JS.</p><ul><li>Did you include an assets folder?</li><li>Did you check header.php with the correct theme settings?</li></ul>';
-	exit();
-}
-else {
-	$cssobj = json_decode(file_get_contents($assets_css));
-	$jsobj = json_decode(file_get_contents($assets_js));
-}
-
 if(strpos($_SERVER['SERVER_NAME'],'local.') !== false || strpos($_SERVER['SERVER_NAME'],'staging.domain.dev') !== false):
-	$env_suffix = 'dev';
-	$main_css = 'main.dev';
-	$print_css = 'print.dev';
-	$head_js = 'head.scripts.dev';
-	$main_js = 'main.scripts.dev';
+	$env_suffix = '';
 else:
-	$env_suffix = 'min';
-	$main_css = $cssobj->main;
-	$print_css = $cssobj->print;
-	$head_js = $jsobj->head;
-	$main_js = $jsobj->main;
+	$env_suffix = '.min';
 endif;
 
 // Variable to set 'critical' css file name to link to on a template basis.
@@ -67,15 +44,15 @@ $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'mobile')
 	<link rel="mask-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/pinned-icon.svg" color="#141414" /><?php // For Safari 9+ pinned tab (http://j.mp/2gpNiw9) ?>
 
 	<!-- Scripts and Stylesheets -->
-	<meta name="fullcss" content="<?php echo get_template_directory_uri() . '/assets/stylesheets/' . $env_suffix . '/' . $main_css . '.css'; ?>" />
-	<meta name="fulljs" content="<?php echo get_template_directory_uri() . '/assets/javascript/' . $env_suffix . '/' . $main_js . '.js'; ?>" />
-	<script><?php include_once($_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/' . $theme_location . '/assets/javascript/' . $env_suffix . '/' . $head_js . '.js'); ?></script>
+	<meta name="fullcss" content="<?php echo get_template_directory_uri() . '/assets/stylesheets/main' . $env_suffix . '.css'; ?>" />
+	<meta name="fulljs" content="<?php echo get_template_directory_uri() . '/assets/javascript/main' . $env_suffix . '.js'; ?>" />
+	<script><?php include_once($_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/' . $theme_location . '/assets/javascript/head' . $env_suffix . '.js'); ?></script>
 	<?php if(isset($_COOKIE['fullcss']) && $_COOKIE['fullcss'] == 'true'): ?>
-		<link rel="stylesheet" href="<?php echo get_template_directory_uri() . '/assets/stylesheets/' . $env_suffix . '/' . $main_css . '.css'; ?>" />
-		<link rel="stylesheet" href="<?php echo get_template_directory_uri() . '/assets/stylesheets/' . $env_suffix . '/' . $print_css . '.css'; ?>" media="print" />
+		<link rel="stylesheet" href="<?php echo get_template_directory_uri() . '/assets/stylesheets/main' . $env_suffix . '.css'; ?>" />
+		<link rel="stylesheet" href="<?php echo get_template_directory_uri() . '/assets/stylesheets/print' . $env_suffix . '.css'; ?>" media="print" />
 	<?php else: ?>
 		<style><?php if($env_suffix == 'dev'): echo '/* ' . $criticalcss . ' css */' . "\n"; endif; include_once($_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/' . $theme_location . '/assets/stylesheets/critical/' . $criticalcss . '.css'); ?></style>
-		<noscript><link rel="stylesheet" href="<?php echo get_template_directory_uri() . '/assets/stylesheets/' . $env_suffix . '/' . $main_css . '.css'; ?>"></noscript>
+		<noscript><link rel="stylesheet" href="<?php echo get_template_directory_uri() . '/assets/stylesheets/main' . $env_suffix . '.css'; ?>"></noscript>
 	<?php endif; ?>
 
 	<!--[if (gte IE 7) & (lte IE 8)]>
