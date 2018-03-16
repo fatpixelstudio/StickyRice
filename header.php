@@ -47,7 +47,7 @@ $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'mobile')
 	<meta name="full_css" content="<?php echo get_template_directory_uri() . '/assets/stylesheets/main' . $env_suffix . '.css'; ?>" />
 	<meta name="full_js" content="<?php echo get_template_directory_uri() . '/assets/javascript/main' . $env_suffix . '.js'; ?>" />
 	<script><?php include_once($_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/' . $theme_location . '/assets/javascript/head' . $env_suffix . '.js'); ?></script>
-	<?php if(isset($_COOKIE['fullcss']) && $_COOKIE['fullcss'] == 'true'): ?>
+	<?php if(isset($_COOKIE['full_css']) && $_COOKIE['full_css'] == 'true'): ?>
 		<link rel="stylesheet" href="<?php echo get_template_directory_uri() . '/assets/stylesheets/main' . $env_suffix . '.css'; ?>" />
 		<link rel="stylesheet" href="<?php echo get_template_directory_uri() . '/assets/stylesheets/print' . $env_suffix . '.css'; ?>" media="print" />
 	<?php else: ?>
