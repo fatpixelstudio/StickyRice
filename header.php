@@ -55,13 +55,6 @@ $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'mobile')
 		<noscript><link rel="stylesheet" href="<?php echo get_template_directory_uri() . '/assets/stylesheets/main' . $env_suffix . '.css'; ?>"></noscript>
 	<?php endif; ?>
 
-	<!--[if (gte IE 7) & (lte IE 8)]>
-	<script src="<?php echo get_template_directory_uri() . '/assets/javascript/lib/plugins/html5shiv/html5shiv.min.js'; ?>"></script>
-	<script src="<?php echo get_template_directory_uri() . '/assets/javascript/lib/plugins/html5shiv/html5shiv-printshiv.min.js'; ?>"></script>
-	<script src="<?php echo get_template_directory_uri() . '/assets/javascript/lib/plugins/nwmatcher/nwmatcher.min.js'; ?>"></script>
-	<script src="<?php echo get_template_directory_uri() . '/assets/javascript/lib/plugins/selectivizr/selectivizr.min.js'; ?>"></script>
-	<![endif;]-->
-
 	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 
 	<?php // wordpress head functions ?>
