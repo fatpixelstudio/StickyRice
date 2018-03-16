@@ -44,8 +44,8 @@ $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'mobile')
 	<link rel="mask-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/pinned-icon.svg" color="#141414" /><?php // For Safari 9+ pinned tab (http://j.mp/2gpNiw9) ?>
 
 	<!-- Scripts and Stylesheets -->
-	<meta name="fullcss" content="<?php echo get_template_directory_uri() . '/assets/stylesheets/main' . $env_suffix . '.css'; ?>" />
-	<meta name="fulljs" content="<?php echo get_template_directory_uri() . '/assets/javascript/main' . $env_suffix . '.js'; ?>" />
+	<meta name="full_css" content="<?php echo get_template_directory_uri() . '/assets/stylesheets/main' . $env_suffix . '.css'; ?>" />
+	<meta name="full_js" content="<?php echo get_template_directory_uri() . '/assets/javascript/main' . $env_suffix . '.js'; ?>" />
 	<script><?php include_once($_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/' . $theme_location . '/assets/javascript/head' . $env_suffix . '.js'); ?></script>
 	<?php if(isset($_COOKIE['fullcss']) && $_COOKIE['fullcss'] == 'true'): ?>
 		<link rel="stylesheet" href="<?php echo get_template_directory_uri() . '/assets/stylesheets/main' . $env_suffix . '.css'; ?>" />
