@@ -198,6 +198,11 @@ function stickyrice_comments( $comment, $args, $depth ) {
  * use the code below.
  */
 
+// function stickyrice_acf_google_api_key() {
+// 	acf_update_setting('google_api_key', 'xxxx');
+// }
+// add_action('acf/init', 'stickyrice_acf_google_api_key');
+
 // if( function_exists('acf_add_options_page') ) {
 //   acf_add_options_page();
 // }
