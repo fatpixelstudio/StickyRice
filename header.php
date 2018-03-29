@@ -3,7 +3,7 @@
 // Put the exact foldername of your theme in here
 $theme_location = 'stickyrice';
 
-if(strpos($_SERVER['SERVER_NAME'],'local.') !== false || strpos($_SERVER['SERVER_NAME'],'staging.domain.dev') !== false):
+if(strpos($_SERVER['SERVER_NAME'],'local.') !== false || strpos($_SERVER['SERVER_NAME'],'.local') !== false || strpos($_SERVER['SERVER_NAME'],'staging.domain.dev') !== false):
 	$env_suffix = '';
 else:
 	$env_suffix = '.min';
