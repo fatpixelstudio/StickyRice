@@ -70,7 +70,7 @@ $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'mobile')
 	<header role="banner" id="page-top" class="banner">
 		<<?php echo (is_front_page()) ? 'h1': 'p'; ?> class="masthead">
 			<?php if(!is_front_page()): ?><a href="/"><?php endif; ?>
-				<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Stickyrice"/>
+				<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="<?php echo get_bloginfo('name'); ?>"/>
 			<?php if(!is_front_page()): ?></a><?php endif; ?>
 		</<?php echo (is_front_page()) ? 'h1': 'p'; ?>>
 		<a href="#nav-main" class="nav-main-toggle nav-main-toggle--open js-nav-main-show">Naar menu</a>
