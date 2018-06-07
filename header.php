@@ -69,7 +69,7 @@ $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'mobile')
 
 	<header role="banner" id="page-top" class="banner">
 		<<?php echo (is_front_page()) ? 'h1': 'p'; ?> class="masthead">
-			<?php if(!is_front_page()): ?><a href="/"><?php endif; ?>
+			<?php if(!is_front_page()): ?><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php endif; ?>
 				<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="<?php echo get_bloginfo('name'); ?>"/>
 			<?php if(!is_front_page()): ?></a><?php endif; ?>
 		</<?php echo (is_front_page()) ? 'h1': 'p'; ?>>
