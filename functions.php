@@ -12,6 +12,9 @@ require_once( 'lib/stickyrice.php' );
 // Load custom post types
 require_once( 'lib/custom-post-type.php' );
 
+// Load icons file
+require_once( 'lib/stickyicons.php' );
+
 // Customize the Wordpress admin (off by default)
 // require_once( 'lib/admin.php' );
 
