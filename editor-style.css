@@ -564,10 +564,10 @@ body#tinymce.wp-editor {
 		font-family: Baskerville,'Goudy Old Style',Palatino,'Book Antiqua',serif !important;
 		font-style: italic; }
 	body#tinymce.wp-editor p {
-		-ms-word-break: break-all;
-		-ms-word-wrap: break-all;
-		word-break: break-word;
-		word-break: break-word;
+		-ms-word-break: normal;
+		-ms-word-wrap: normal;
+		word-break: normal;
+		word-break: normal;
 		-webkit-hyphens: auto;
 		-moz-hyphens: auto;
 		hyphens: auto;
