@@ -204,6 +204,9 @@ function stickyrice_comments( $comment, $args, $depth ) {
  * use the code below.
  */
 
+// Hide the ACF menu item if not WP DEBUG
+if ( ! WP_DEBUG ) add_filter( 'acf/settings/show_admin', '__return_false' );
+
 // function stickyrice_acf_google_api_key() {
 // 	acf_update_setting('google_api_key', 'xxxx');
 // }
