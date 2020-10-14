@@ -31,7 +31,6 @@ $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'mobile')
 	<meta charset="utf-8" />
 
 	<title><?php wp_title('&mdash;'); ?></title>
-	<meta name="description" content="" />
 
 	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 
