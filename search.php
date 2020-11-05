@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 	<div class="contain-padding" role="main">
-		<h1 class="alpha-heading"><span><?php _e( 'Resulaten voor:', 'stickyricetheme' ); ?></span> <?php echo esc_attr(get_search_query()); ?></h1>
+		<h1 class="alpha-heading"><span><?php _e( 'Resultaten voor:', 'stickyricetheme' ); ?></span> <?php echo esc_attr(get_search_query()); ?></h1>
 
 		<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
