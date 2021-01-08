@@ -38,6 +38,9 @@ $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'mobile')
 
 	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 
+	<!-- Prefetch DNS lookups -->
+	<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
 	<!-- Preload assets (fonts, stylesheets, etc.) -->
 	<link rel="preload" href="<?php echo get_template_directory_uri(); ?>/assets/fonts/firasans/firasans-bold.woff2" as="font" type="font/woff2" crossorigin />
 
