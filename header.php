@@ -69,8 +69,8 @@ $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'mobile')
 
 </head>
 <body <?php body_class(); ?>>
-	<!--[if lte IE 8]>
-	<p class="oldie-message">Let op! U gebruikt Internet Explorer 8 of lager (een <strong>sterk verouderd</strong> internetprogramma) om deze website te bekijken. <br /> <a href="http://browsehappy.com/">Download gratis een snellere en veiligere versie</a> om deze website optimaal te ervaren.</p>
+	<!--[if lte IE 9]>
+	<p class="oldie-message">Let op! U gebruikt Internet Explorer 9 of lager (een <strong>sterk verouderd</strong> internetprogramma) om deze website te bekijken. <br /> <a href="http://browsehappy.com/">Download gratis een snellere en veiligere versie</a> om deze website optimaal te ervaren.</p>
 	<![endif]-->
 
 	<header role="banner" id="page-top" class="banner">
