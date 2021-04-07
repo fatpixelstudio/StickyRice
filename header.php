@@ -50,11 +50,11 @@ $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'mobile')
 	<link rel="mask-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/pinned-icon.svg" color="#141414" /><?php // For Safari 9+ pinned tab (http://j.mp/2gpNiw9) ?>
 
 	<!-- Scripts and Stylesheets -->
-	<meta name="full_css" content="<?php echo get_template_directory_uri() . '/assets/stylesheets/main' . $env_suffix . '.css?v='.$packagejson['version']; ?>; ?>" />
+	<meta name="full_css" content="<?php echo get_template_directory_uri() . '/assets/stylesheets/main' . $env_suffix . '.css?v='.$packagejson['version']; ?>" />
 	<meta name="full_js" content="<?php echo get_template_directory_uri() . '/assets/javascript/main' . $env_suffix . '.js'; ?>" />
 	<script><?php include_once($_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/' . $theme_location . '/assets/javascript/head' . $env_suffix . '.js'); ?></script>
 	<?php if(isset($_COOKIE['full_css']) && $_COOKIE['full_css'] == 'true'): ?>
-		<link rel="stylesheet" href="<?php echo get_template_directory_uri() . '/assets/stylesheets/main' . $env_suffix . '.css?v='.$packagejson['version']; ?>; ?>" />
+		<link rel="stylesheet" href="<?php echo get_template_directory_uri() . '/assets/stylesheets/main' . $env_suffix . '.css?v='.$packagejson['version']; ?>" />
 		<link rel="stylesheet" href="<?php echo get_template_directory_uri() . '/assets/stylesheets/print' . $env_suffix . '.css'; ?>" media="print" />
 	<?php else: ?>
 		<style><?php if($env_suffix == 'dev'): echo '/* ' . $criticalcss . ' css */' . "\n"; endif; include_once($_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/' . $theme_location . '/assets/stylesheets/critical/' . $criticalcss . '.css'); ?></style>
