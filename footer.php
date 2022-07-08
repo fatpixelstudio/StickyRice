@@ -10,7 +10,7 @@
 		<a href="#page-top" class="nav-main-toggle nav-main-toggle--close js-nav-main-hide">Terug naar boven</a>
 	</nav>
 	<footer role="contentinfo" class="contentinfo copy">
-		<p>&copy; Fat Pixel</p>
+		<p>&copy; <?php echo get_bloginfo('name'); ?></p>
 	</footer>
 
 	<?php wp_footer(); ?>
