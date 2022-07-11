@@ -77,7 +77,7 @@ $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'mobile')
 		<<?php echo (is_front_page()) ? 'h1': 'p'; ?> class="masthead">
 			<?php if(!is_front_page()): ?><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php endif; ?>
 				<span class="masthead__label"><?php echo get_bloginfo('name'); ?></span>
-				<span class="masthead__logo"><?php echo logo(); ?></span>
+				<span class="masthead__logo" aria-hidden="true"><?php echo logo(); ?></span>
 			<?php if(!is_front_page()): ?></a><?php endif; ?>
 		</<?php echo (is_front_page()) ? 'h1': 'p'; ?>>
 		<a href="#nav-main" class="nav-main-toggle nav-main-toggle--open js-nav-main-show">Naar menu</a>
