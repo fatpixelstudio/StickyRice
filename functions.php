@@ -204,6 +204,9 @@ function stickyrice_comments( $comment, $args, $depth ) {
  * use the code below.
  */
 
+// Define your ACF Pro license key
+//define('ACF_PRO_LICENSE', '{YOUR LICENSE KEY HERE}');
+
 // Hide the ACF menu item if not WP DEBUG
 if ( ! WP_DEBUG ) add_filter( 'acf/settings/show_admin', '__return_false' );
 
