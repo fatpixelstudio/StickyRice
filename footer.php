@@ -13,6 +13,21 @@
 		<p>&copy; <?php echo get_bloginfo('name'); ?></p>
 	</footer>
 
+
+	<?php
+	$theme_location = 'stickyrice';
+	
+	if(strpos($_SERVER['SERVER_NAME'],'.local') !== false || strpos($_SERVER['SERVER_NAME'],'staging.basboerman') !== false):
+		$env_suffix = '';
+	else:
+		$env_suffix = '.min';
+	endif;
+	// Get variables form package.json
+	$packagefile = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/' . $theme_location . '/package.json');
+	$packagejson = json_decode($packagefile, true);
+	?>
+	<script src="<?php echo get_template_directory_uri() . '/dist/main' . $env_suffix . '.js?v=' .$packagejson['version']; ?>" async></script>
+
 	<?php wp_footer(); ?>
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
@@ -23,5 +38,6 @@
 		gtag('js', new Date());
 		gtag('config', 'UA-XXXXXXXXX-X', { 'anonymize_ip': true });
 	</script>
+
 </body>
 </html>
