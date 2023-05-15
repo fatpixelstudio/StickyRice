@@ -53,6 +53,8 @@ $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'mobile')
 
 	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 
+	<meta name="theme-color" content="#000000" />
+
 	<?php // wordpress head functions ?>
 	<?php wp_head(); ?>
 	<?php // end of wordpress head functions ?>
