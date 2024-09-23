@@ -1,0 +1,9 @@
+/**
+ * Styles for the WP block editor blocks.
+ */
+
+.wp-block-quote {
+	background-color: #ececec;
+	padding: .25em 1em;
+	font-size: 1.25em;
+}

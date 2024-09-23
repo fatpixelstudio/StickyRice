@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-	<main class="contain-padding">
+	<main class="contain-width" id="main">
 
 		<h1 class="alpha-heading">Pagina niet gevonden</h1>
 		<div class="copy">

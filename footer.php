@@ -4,14 +4,16 @@
 		<?php wp_nav_menu(array(
 			'container' => false,                           // remove nav container
 			'menu' => __( 'Hoofdmenu', 'stickyricetheme' ), // nav name
-			'menu_class' => 'nav-main__list',               // adding custom nav class
+			'menu_class' => 'nav-main__list contain-width',               // adding custom nav class
 			'theme_location' => 'nav-main',                 // where it's located in the theme
 		)); ?>
 		<a href="#page-top" class="nav-main-toggle nav-main-toggle--close js-nav-main-hide"><?php _e( 'Terug naar boven', 'stickyrice' ); ?></a>
 	</nav>
-	<footer role="contentinfo" class="contentinfo copy">
-		<p>&copy; <?php echo get_bloginfo('name'); ?></p>
-	</footer>
+	<div class="footer">
+		<footer role="contentinfo" class="contain-width contentinfo">
+			<p>&copy; <?php echo get_bloginfo('name'); ?></p>
+		</footer>
+	</div>
 
 	<?php $theme_data = sr_get_theme_data(); ?>
 

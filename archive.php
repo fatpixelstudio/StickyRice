@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-	<main class="contain-padding">
+	<main class="contain-width" id="main">
 
 		<?php if (is_category()) { ?>
 			<h1 class="alpha-heading">
@@ -62,7 +62,7 @@
 				</article>
 			<?php endwhile; ?>
 
-				<?php stickyrice_page_navi(); ?>
+				<?php sticky_page_nav(); ?>
 
 			<?php else : ?>
 				<p>Geen berichten gevonden.</p>

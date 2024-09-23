@@ -5,7 +5,7 @@
 	$news_page = get_post($news_page_id);
 	?>
 
-	<main class="contain-padding">
+	<main class="contain-width" id="main">
 
 		<div class="copy">
 			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
