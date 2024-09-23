@@ -6,20 +6,11 @@ URL: https://fatpixel.nl
 Setting the basics, thumbnails, comments, load stuff
 */
 
-// Load all the stickyrice library specifics
-require_once( 'lib/stickyrice.php' );
-
-// Load custom post types
-require_once( 'lib/custom-post-type.php' );
-
-// Load advanced custom fields
-require_once( 'lib/advanced-custom-fields.php' );
-
-// Load icons file
-require_once( 'lib/stickyicons.php' );
-
-// Customize the Wordpress admin (off by default)
-// require_once( 'lib/admin.php' );
+require 'lib/stickyrice.php';
+require 'lib/sticky-helpers.php';
+require 'lib/sticky-defaults.php';
+require 'lib/sticky-icons.php';
+require 'lib/custom-post-types.php';
 
 /**
  * ----------------------------------------------------------------------------
@@ -27,39 +18,30 @@ require_once( 'lib/stickyicons.php' );
  * ----------------------------------------------------------------------------
  */
 
-function stickyrice_cook() {
+ function stickyrice_cook() {
+	/**
+	 * Set up theme defaults and register support for various WordPress features
+	 */
+	// TODO: determine how themes are going to be translated: through a .pot file or through a plugin like Polylang
+	// load_theme_textdomain( 'stickyrice', get_template_directory() . '/languages' );
 
-  // Allow editor styles
-  add_editor_style();
+	// launching operation cleanup
+	add_action( 'init', 'stickyrice_head_cleanup' );
 
-  // launching operation cleanup
-  add_action( 'init', 'stickyrice_head_cleanup' );
-  // A better title
-  add_filter( 'wp_title', 'rw_title', 10, 3 );
-  // remove WP version from RSS
-  add_filter( 'the_generator', 'stickyrice_rss_version' );
-  // remove pesky injected css for recent comments widget
-  add_filter( 'wp_head', 'stickyrice_remove_wp_widget_recent_comments_style', 1 );
-  // clean up comment styles in the head
-  add_action( 'wp_head', 'stickyrice_remove_recent_comments_style', 1 );
-  // clean up gallery output in wp
-  add_filter( 'gallery_style', 'stickyrice_gallery_style' );
+	update_option( 'image_default_link_type', 'none' );
+	update_option( 'image_default_size', 'full' );
 
-  // if you want to enqueue base scripts and styles, here's a good spot for that
-  // add_action( 'wp_enqueue_scripts', 'stickyrice_scripts_and_styles', 999 );
-  // ie conditional wrapper
+	remove_theme_support( 'widgets-block-editor' );
 
-  // launching this stuff after theme setup
-  stickyrice_theme_support();
+	add_theme_support( 'post-thumbnails' );
+	add_theme_support( 'title-tag' );
+	add_theme_support( 'menus' );
 
-  // adding sidebars to Wordpress (these are created in functions.php)
-  add_action( 'widgets_init', 'stickyrice_register_sidebars' );
-
-  // cleaning up random code around images
-  add_filter( 'the_content', 'stickyrice_filter_ptags_on_images' );
-  // cleaning up excerpt
-  add_filter( 'excerpt_more', 'stickyrice_excerpt_more' );
-
+	register_nav_menus( [
+		'nav-main' => __( 'Hoofdmenu', 'stickyrice' ),
+		'nav-foot' => __( 'Footermenu', 'stickyricetheme' ),
+		'nav-bottom' => __( 'Juridisch menu', 'stickyricetheme' ),
+	] );
 }
 
 // Hook stickyrice into theme load
@@ -67,12 +49,24 @@ add_action( 'after_setup_theme', 'stickyrice_cook' );
 
 
 /**
- * OEMBED size options
+ * ----------------------------------------------------------------------------
+ * Enqueue scripts and styles
+ * ----------------------------------------------------------------------------
  */
 
-if ( ! isset( $content_width ) ) {
-	$content_width = 640;
-}
+// add_action( 'wp_enqueue_scripts', function () {
+// 	$css_url = get_theme_file_uri( 'dist/styles/main.styles.css' );
+// 	$css_path = get_theme_file_path( 'dist/styles/main.styles.css' );
+
+// 	wp_enqueue_style( 'stickyrice', $css_url, [], filemtime( $css_path ) );
+
+// 	$js_url = get_theme_file_uri( 'dist/scripts/main.scripts.js' );
+// 	$js_path = get_theme_file_path( 'dist/scripts/main.scripts.js' );
+
+// 	wp_enqueue_script( 'stickyrice', $js_url, [], filemtime( $js_path ), true );
+// 	wp_localize_script( 'stickyrice', 'urls', [ 'ajax' => admin_url( 'admin-ajax.php' ) ] );
+// } );
+
 
 /**
  * ----------------------------------------------------------------------------
@@ -84,9 +78,11 @@ if ( ! isset( $content_width ) ) {
 add_image_size( 'content-width-full', 1024, 9999 );
 add_image_size( 'content-width-half', 512, 9999 );
 add_image_size( 'content-width-quarter', 256, 9999 );
-add_image_size( 'header-home', 1800, 1010, true );
-add_image_size( 'header-page', 1800, 800, true );
-add_image_size( 'article-square', 400, 400, true );
+add_image_size( 'header-page', 2400, 1200, true );
+add_image_size( 'article-square', 800, 800, true );
+add_image_size( 'article-landscape', 1200, 800, true );
+add_image_size( 'article-portrait', 960, 1600, true );
+add_image_size( 'article-full', 2400, 1800, true );
 
 /*
 The function below adds the ability to use the dropdown menu to select
@@ -99,113 +95,21 @@ add_filter( 'image_size_names_choose', 'stickyrice_custom_image_sizes' );
 
 // Image sizes in editor
 function stickyrice_custom_image_sizes( $sizes ) {
-    return array_merge( $sizes, array(
-        'content-width-full' => __('100% breed'),
-        'content-width-half' => __('50% breed'),
-        'content-width-quarter' => __('25% breed'),
-    ) );
+	return array_merge( $sizes, array(
+		'content-width-full' => __('100% breed'),
+		'content-width-half' => __('50% breed'),
+		'content-width-quarter' => __('25% breed'),
+	) );
 }
-
-/**
- * ----------------------------------------------------------------------------
- * Active sidebars & widgets
- * ----------------------------------------------------------------------------
- */
-
-// Sidebars & Widgetizes Areas
-function stickyrice_register_sidebars() {
-	register_sidebar(array(
-		'id' => 'sidebar-forum',
-		'name' => __( 'Forum tools', 'stickyricetheme' ),
-		'description' => __( 'The tools below the forum.', 'stickyricetheme' ),
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h4 class="GammaHeading">',
-		'after_title' => '</h4>',
-	));
-
-	/*
-	to add more sidebars or widgetized areas, just copy
-	and edit the above sidebar code. In order to call
-	your new sidebar just use the following code:
-
-	Just change the name to whatever your new
-	sidebar's id is, for example:
-
-	register_sidebar(array(
-		'id' => 'sidebar2',
-		'name' => __( 'Sidebar 2', 'stickyricetheme' ),
-		'description' => __( 'The second (secondary) sidebar.', 'stickyricetheme' ),
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h4 class="widgettitle">',
-		'after_title' => '</h4>',
-	));
-
-	To call the sidebar in your template, you can just copy
-	the sidebar.php file and rename it to your sidebar's name.
-	So using the above example, it would be:
-	sidebar-sidebar2.php
-
-	*/
-}
-
-/**
- * ----------------------------------------------------------------------------
- * Comment layout
- * ----------------------------------------------------------------------------
- */
-
-// Comment Layout
-function stickyrice_comments( $comment, $args, $depth ) {
-   $GLOBALS['comment'] = $comment; ?>
-  <div id="comment-<?php comment_ID(); ?>" <?php comment_class('Comment cf'); ?>>
-    <article  class="cf">
-      <header class="Comment-head vcard">
-        <?php
-        /*
-          this is the new responsive optimized comment image. It used the new HTML5 data-attribute to display comment gravatars on larger screens only. What this means is that on larger posts, mobile sites don't have a ton of requests for comment images. This makes load time incredibly fast! If you'd like to change it back, just replace it with the regular wordpress gravatar call:
-          echo get_avatar($comment,$size='32',$default='<path_to_url>' );
-        */
-        ?>
-        <?php // custom gravatar call ?>
-        <div class="Comment-author">
-          <?php
-            // create variable
-            $bgauthemail = get_comment_author_email();
-          ?>
-          <img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5( $bgauthemail ); ?>?s=40" class="Comment-avatar load-gravatar avatar avatar-48 photo" height="40" width="40" src="<?php echo get_template_directory_uri(); ?>/library/images/nothing.gif" />
-        <?php // end custom gravatar call ?>
-          <span class="Comment-authorName"><?php printf(__( '<cite class="fn">%1$s</cite> %2$s', 'stickyricetheme' ), get_comment_author_link(), edit_comment_link(__( '(Edit)', 'stickyricetheme' ),'  ','') ) ?></span>
-        </div>
-        <time datetime="<?php echo comment_time('Y-m-j'); ?>" class="Comment-time"><a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>"><?php comment_time(__( 'd/m/Y H:i', 'stickyricetheme' )); ?> </a></time>
-
-      </header>
-      <?php if ($comment->comment_approved == '0') : ?>
-        <div class="Comment-alert alert alert-info">
-          <p><?php _e( 'Je reactie wordt beoordeeld door de beheerders.', 'stickyricetheme' ) ?></p>
-        </div>
-      <?php endif; ?>
-      <section class="Comment-text Copy comment_content cf">
-        <?php comment_text() ?>
-      </section>
-      <?php comment_reply_link(array_merge( $args, array('depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
-    </article>
-  <?php // </li> is added by WordPress automatically ?>
-<?php
-} // don't remove this bracket!
-
 
 /*
  * ----------------------------------------------------------------------------
  * Advance Custom Fields
  * ----------------------------------------------------------------------------
- * If you're using Advanced Custom Fields, and want an options page,
- * use the code below.
  */
 
 // Define your ACF Pro license key
-//define('ACF_PRO_LICENSE', '{YOUR LICENSE KEY HERE}');
+//define('ACF_PRO_LICENSE', 'xxxx');
 
 // Hide the ACF menu item if not WP DEBUG
 if ( ! WP_DEBUG ) add_filter( 'acf/settings/show_admin', '__return_false' );
@@ -215,22 +119,26 @@ if ( ! WP_DEBUG ) add_filter( 'acf/settings/show_admin', '__return_false' );
 // }
 // add_action('acf/init', 'stickyrice_acf_google_api_key');
 
-// if( function_exists('acf_add_options_page') ) {
-//   acf_add_options_page(array('page_title' => 'Site opties'));
-// }
+// Add ACF options page
+// add_action( 'acf/init', function () {
+// 	acf_add_options_page( [
+// 		'page_title' => 'Site-opties',
+// 		'menu_title' => 'Site-opties',
+// 		'menu_slug'  => 'site-options',
+// 		'icon_url'   => 'dashicons-admin-generic',
+// 	] );
+// }, 5 );
 
-/*
- * ----------------------------------------------------------------------------
- * Remove admin bar
- * ----------------------------------------------------------------------------
- */
-
-add_action('after_setup_theme', 'remove_admin_bar');
-
-function remove_admin_bar() {
-  if (!current_user_can('administrator') && !is_admin()) {
-    show_admin_bar(false);
-  }
-}
-
-?>
+// Add ACF options subpages
+// add_action( 'acf/init', function () {
+// 	acf_add_options_sub_page( [
+// 		'page_title'  => 'Algemeen',
+// 		'menu_title'  => 'Algemeen',
+// 		'parent_slug' => 'site-options',
+// 	] );
+// 	acf_add_options_sub_page( [
+// 		'page_title'  => '404 pagina',
+// 		'menu_title'  => '404 pagina',
+// 		'parent_slug' => 'site-options',
+// 	] );
+// }, 10 );

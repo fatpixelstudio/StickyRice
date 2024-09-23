@@ -1,32 +1,4 @@
-<?php
-// Theme name / location
-// Put the exact foldername of your theme in here
-$theme_location = 'stickyrice';
-
-if(strpos($_SERVER['SERVER_NAME'],'local.') !== false || strpos($_SERVER['SERVER_NAME'],'.local') !== false || strpos($_SERVER['SERVER_NAME'],'staging.domain.dev') !== false):
-	$env_suffix = '';
-else:
-	$env_suffix = '.min';
-endif;
-
-// Get variables form package.json
-$packagefile = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/' . $theme_location . '/package.json');
-$packagejson = json_decode($packagefile, true);
-
-// Variable to set 'critical' css file name to link to on a template basis.
-// By default the varibale is set to 'default'. To link to another 'critical'
-// css file, add name of another file to the include snippet (at the top
-// of the template), like this:
-// global $criticalcss; $criticalcss = 'home';
-global $criticalcss; // Set as global, if defined in page template
-$criticalcss = (isset($criticalcss)) ? $criticalcss : 'default';
-
-// Mobile detect
-require_once $_SERVER['DOCUMENT_ROOT'] . '/wp-content/themes/' . $theme_location . '/lib/Mobile_Detect.php';
-$detect = new Mobile_Detect;
-$deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'mobile') : 'computer');
-
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html class="no-js" <?php language_attributes(); ?>>
 <head>
 	<meta charset="utf-8" />
@@ -46,10 +18,11 @@ $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'mobile')
 	<link rel="icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/favicon.png" /><?php // For Firefox, Chrome, Safari, IE 11+ and Opera, 192x192 pixels in size ?>
 	<link rel="mask-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/pinned-icon.svg" color="#141414" /><?php // For Safari 9+ pinned tab (http://j.mp/2gpNiw9) ?>
 
+	<?php $theme_data = sr_get_theme_data(); ?>
+
 	<!-- Scripts and Stylesheets -->
-	<link rel="stylesheet" href="<?php echo get_template_directory_uri() . '/dist/main' . $env_suffix . '.css?v='.$packagejson['version']; ?>" />
-	<?php // Add print stylesheet if you want, because you should ?>
-	<?php /*<link rel="stylesheet" href="<?php echo get_template_directory_uri() . '/assets/stylesheets/print' . $env_suffix . '.css'; ?>" media="print" />*/ ?>
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri() . '/dist/main' . $theme_data['env_suffix'] . '.css?v='.$theme_data['version']; ?>" />
+	<script type="text/javascript" src="<?php echo get_template_directory_uri() . '/dist/head' . $theme_data['env_suffix'] . '.js'; ?>" async></script>
 
 	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 
@@ -59,13 +32,13 @@ $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'mobile')
 	<?php wp_head(); ?>
 	<?php // end of wordpress head functions ?>
 
-	<script type="text/javascript" src="<?php echo get_template_directory_uri() . '/dist/head' . $env_suffix . '.js'; ?>" async></script>
-
 </head>
 <body <?php body_class(); ?>>
 	<!--[if lte IE 9]>
 	<p class="oldie-message">Let op! U gebruikt Internet Explorer 9 of lager (een <strong>sterk verouderd</strong> internetprogramma) om deze website te bekijken. <br /> <a href="http://browsehappy.com/">Download gratis een snellere en veiligere versie</a> om deze website optimaal te ervaren.</p>
 	<![endif]-->
+
+	<a class="skip-link" href="#main"><?php _e( 'Direct naar inhoud', 'stickyrice' ); ?></a>
 
 	<header role="banner" id="page-top" class="banner">
 		<<?php echo (is_front_page()) ? 'h1': 'p'; ?> class="masthead">
@@ -74,5 +47,5 @@ $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'mobile')
 				<span class="masthead__logo" aria-hidden="true"><?php echo logo(); ?></span>
 			</a>
 		</<?php echo (is_front_page()) ? 'h1': 'p'; ?>>
-		<a href="#nav-main" class="nav-main-toggle nav-main-toggle--open js-nav-main-show">Naar menu</a>
+		<a href="#nav-main" class="nav-main-toggle nav-main-toggle--open js-nav-main-show"><?php _e( 'Naar menu', 'stickyrice' ); ?></a>
 	</header>
