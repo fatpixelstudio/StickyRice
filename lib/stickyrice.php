@@ -29,6 +29,8 @@ function stickyrice_head_cleanup() {
 	remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );
 	// WP version
 	remove_action( 'wp_head', 'wp_generator' );
+	// a better title
+	add_filter( 'wp_title', 'stickyrice_nice_title', 10, 3 );
 	// remove WP version from css
 	add_filter( 'style_loader_src', 'stickyrice_remove_wp_ver_css_js', 9999 );
 	// remove Wp version from scripts
@@ -74,6 +76,34 @@ function stickyrice_gallery_style($css) {
 	return preg_replace( "!<style type='text/css'>(.*?)</style>!s", '', $css );
 }
 
+// A better title
+function stickyrice_nice_title( $title, $sep, $seplocation ) {
+	global $page, $paged;
+
+	// Don't affect in feeds.
+	if ( is_feed() ) return $title;
+
+	// Add the blog's name
+	if ( 'right' == $seplocation ) {
+		$title .= get_bloginfo( 'name' );
+	} else {
+		$title = get_bloginfo( 'name' ) . $title;
+	}
+
+	// Add the blog description for the home/front page.
+	$site_description = get_bloginfo( 'description', 'display' );
+
+	if ( $site_description && ( is_home() || is_front_page() ) ) {
+		$title .= " {$sep} {$site_description}";
+	}
+
+	// Add a page number if necessary:
+	if ( $paged >= 2 || $page >= 2 ) {
+		$title .= " {$sep} " . sprintf( __( 'Page %s', 'stickyrice' ), max( $paged, $page ) );
+	}
+
+	return $title;
+}
 
 /**
  * ----------------------------------------------------------------------------
