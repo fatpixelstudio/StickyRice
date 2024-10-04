@@ -48,6 +48,13 @@
 					<span class="masthead__logo" aria-hidden="true"><?php echo logo(); ?></span>
 				</a>
 			</<?php echo (is_front_page()) ? 'h1': 'p'; ?>>
-			<a href="#nav-main" class="nav-main-toggle nav-main-toggle--open js-nav-main-show"><?php _e( 'Naar menu', 'stickyrice' ); ?></a>
+			<a href="#nav-main" class="nav-main-toggle nav-main-toggle--open js-nav-main-show">
+				<span class="nav-main-toggle__label">
+					<?php _e( 'Naar menu', 'stickyrice' ); ?>
+				</span>
+				<span class="nav-main-toggle__icon" aria-hidden="true">
+					<?php echo icon_menu(); ?>
+				</span>
+			</a>
 		</div>
 	</header>

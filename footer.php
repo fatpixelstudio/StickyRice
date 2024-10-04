@@ -7,7 +7,14 @@
 			'menu_class' => 'nav-main__list contain-width',               // adding custom nav class
 			'theme_location' => 'nav-main',                 // where it's located in the theme
 		)); ?>
-		<a href="#page-top" class="nav-main-toggle nav-main-toggle--close js-nav-main-hide"><?php _e( 'Terug naar boven', 'stickyrice' ); ?></a>
+		<a href="#page-top" class="nav-main-toggle nav-main-toggle--close js-nav-main-hide">
+			<span class="nav-main-toggle__label">
+				<?php _e( 'Terug naar boven', 'stickyrice' ); ?>
+			</span>
+			<span class="nav-main-toggle__icon" aria-hidden="true">
+				<?php echo icon_close(); ?>
+			</span>
+		</a>
 	</nav>
 	<div class="footer">
 		<footer role="contentinfo" class="contain-width contentinfo">
