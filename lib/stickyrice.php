@@ -106,6 +106,37 @@ function stickyrice_nice_title( $title, $sep, $seplocation ) {
 }
 
 /**
+ * Enqueue block editor and front-end styles for the theme.
+ *
+ * This function enqueues a stylesheet for both the block editor and the front end.
+ * The stylesheet, 'style-blocks.css', should be located in the root of your theme directory.
+ *
+ * If you wish to enqueue styles exclusively for the editor, you can use the is_admin()
+ * function to conditionally load assets.
+ *
+ * @since 1.0.0
+ */
+function sr_enqueue_block_styles() {
+
+    // If you want to add styles exclusively for the block editor, you can use:
+    if ( is_admin() ) {
+        // Register the editor stylesheet located in the theme's root directory.
+        wp_register_style(
+            'sr-editor-styles',
+            get_theme_file_uri('editor-blocks.css'),
+            [],
+            '1.2'
+        );
+
+        // Enqueue editor styles.
+        wp_enqueue_style( 'sr-editor-styles' );
+    }
+}
+// Hook the function to 'enqueue_block_assets' to load the stylesheet in the block editor and the front end.
+add_action( 'enqueue_block_assets', 'sr_enqueue_block_styles' );
+
+
+/**
  * ----------------------------------------------------------------------------
  * Excerpts
  * ----------------------------------------------------------------------------
