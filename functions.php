@@ -42,6 +42,9 @@ require 'lib/custom-post-types.php';
 		'nav-foot' => __( 'Footermenu', 'stickyricetheme' ),
 		'nav-bottom' => __( 'Juridisch menu', 'stickyricetheme' ),
 	] );
+
+	// Enable support for editor styles
+	add_editor_style();
 }
 
 // Hook stickyrice into theme load
