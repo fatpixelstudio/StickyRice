@@ -217,7 +217,7 @@ function get_top_ancestor_page_id($id) {
 		'format'       => '',
 		'current'      => max( 1, get_query_var('paged') ),
 		'total'        => $wp_query->max_num_pages,
-		'prev_text'    => get_svg('icon-chevron-right'),
+		'prev_text'    => get_svg('icon-chevron-left'),
 		'next_text'    => get_svg('icon-chevron-right'),
 		'type'         => 'list',
 		'end_size'     => 3,

@@ -17,7 +17,7 @@ function sr_dump( ...$variables ) {
  * Returns the contents of an SVG file from the /images directory
  */
 function get_svg( string $filename, ?string $class = '' ) {
-	$svg = @file_get_contents( get_theme_file_path( 'img/svg/' . $filename . '.svg' ) ) ?: '';
+	$svg = @file_get_contents( get_theme_file_path( 'assets/images/svg/' . $filename . '.svg' ) ) ?: '';
 
 	if ( $class ) {
 		$svg = str_replace( '<svg', '<svg class="' . $class . '"', $svg );
