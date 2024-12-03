@@ -40,7 +40,7 @@ function sr_get_theme_data($theme_location = null, $staging_domain = null) {
 		$staging_domain = 'staging.domain.dev';
 	}
 
-	if(strpos($_SERVER['SERVER_NAME'],'local.') !== false || strpos($_SERVER['SERVER_NAME'],'.local') !== false || strpos($_SERVER['SERVER_NAME'],$staging_domain) !== false ) {
+	if(strpos($_SERVER['SERVER_NAME'],'local.') !== false || strpos($_SERVER['SERVER_NAME'],'.test') !== false || strpos($_SERVER['SERVER_NAME'],$staging_domain) !== false ) {
 		$env_suffix = '';
 		$subfolder = '';
 	}
