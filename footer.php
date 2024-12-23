@@ -1,6 +1,5 @@
 
-	<nav role="navigation" id="nav-main" class="nav-main js-nav-main">
-		<h2 class="is-hidden-visually"><?php _e( 'Menu', 'stickyrice' ); ?></h2>
+	<nav id="nav-main" class="nav-main js-nav-main">
 		<?php wp_nav_menu(array(
 			'container' => false,                           // remove nav container
 			'menu' => __( 'Hoofdmenu', 'stickyricetheme' ), // nav name
