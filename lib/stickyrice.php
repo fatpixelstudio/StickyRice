@@ -76,6 +76,9 @@ function stickyrice_gallery_style($css) {
 	return preg_replace( "!<style type='text/css'>(.*?)</style>!s", '', $css );
 }
 
+// disable XML-RPC
+add_filter( 'xmlrpc_enabled', '__return_false' );
+
 // A better title
 function stickyrice_nice_title( $title, $sep, $seplocation ) {
 	global $page, $paged;
