@@ -39,6 +39,13 @@ add_filter( 'wpseo_metabox_prio', function () {
 	return 'low';
 } );
 
+/**
+ * Move RankMath meta box to the bottom
+ */
+add_filter( 'rank_math/metabox/priority', function () {
+	return 'low';
+} );
+
 // Allow SVG's to be uploaded
 function cc_mime_types($mimes)
 {
