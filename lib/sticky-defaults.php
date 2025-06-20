@@ -19,7 +19,7 @@ add_filter( 'tiny_mce_before_init', function ( $settings ) {
  */
 add_filter( 'upload_size_limit', function ( $size ) {
 	if ( ! current_user_can( 'manage_options' ) ) {
-		$size = 4 * 1024 * 1024;
+		$size = 16 * 1024 * 1024;
 	}
 
 	return $size;
