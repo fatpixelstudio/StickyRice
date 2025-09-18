@@ -37,7 +37,7 @@ function sr_get_theme_data($theme_location = null, $staging_domain = null) {
 		$theme_location = get_template();
 	}
 	if(!isset($staging_domain)) {
-		$staging_domain = 'staging.domain.dev';
+		$staging_domain = 'fatpixel.dev';
 	}
 
 	if(strpos($_SERVER['SERVER_NAME'],'local.') !== false || strpos($_SERVER['SERVER_NAME'],'.test') !== false || strpos($_SERVER['SERVER_NAME'],$staging_domain) !== false ) {
