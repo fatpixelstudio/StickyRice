@@ -199,6 +199,29 @@ function get_top_ancestor_page_id($id) {
 	}
 }
 
+function coming_soon_mode() {
+	// Toon de site wel aan ingelogde gebruikers of op de inlogpagina.
+	if ( is_user_logged_in() || is_admin() ) {
+		return;
+	}
+
+	// Include the coming soon page and exit, you should add it as a template file
+	include(get_template_directory() . '/coming-soon.php');
+	exit;
+}
+
+// Activate the coming soon mode
+// add_action('template_redirect', 'coming_soon_mode');
+
+// If the coming soon is active, you probably don't want to show the admin bar for non-admins and editors
+// if (!current_user_can('manage_options')) {
+// 	add_filter('show_admin_bar', '__return_false');
+// }
+// if (!current_user_can('edit_posts')) {
+// 	add_filter('show_admin_bar', '__return_false');
+// }
+
+
 
 /**
  * ----------------------------------------------------------------------------
@@ -228,3 +251,4 @@ function get_top_ancestor_page_id($id) {
 		) );
 	echo '</nav>';
 }
+
