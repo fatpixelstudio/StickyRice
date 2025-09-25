@@ -138,6 +138,16 @@ function sr_enqueue_block_styles() {
 // Hook the function to 'enqueue_block_assets' to load the stylesheet in the block editor and the front end.
 add_action( 'enqueue_block_assets', 'sr_enqueue_block_styles' );
 
+/**
+ * Remove styles from the head if they are not needed
+ */
+
+ // Remove WP Block Library styles, comment this out if you need the block library!
+function stickyrice_deregister_blocklibrary_styles() {
+	wp_dequeue_style( 'wp-block-library' );
+}
+add_action( 'wp_print_styles', 'stickyrice_deregister_blocklibrary_styles', 100 );
+
 
 /**
  * ----------------------------------------------------------------------------
