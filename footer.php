@@ -3,7 +3,7 @@
 		<?php wp_nav_menu(array(
 			'container' => false,                           // remove nav container
 			'menu' => __( 'Hoofdmenu', 'stickyricetheme' ), // nav name
-			'menu_class' => 'nav-main__list contain-width',               // adding custom nav class
+			'menu_class' => 'nav-main__list',               // adding custom nav class
 			'theme_location' => 'nav-main',                 // where it's located in the theme
 		)); ?>
 		<a href="#page-top" class="nav-main-toggle nav-main-toggle--close js-nav-main-hide">
