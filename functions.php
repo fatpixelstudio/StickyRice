@@ -36,6 +36,7 @@ require 'lib/custom-post-types.php';
 	add_theme_support( 'post-thumbnails' );
 	add_theme_support( 'title-tag' );
 	add_theme_support( 'menus' );
+	add_theme_support( 'editor-styles' );
 
 	register_nav_menus( [
 		'nav-main' => __( 'Hoofdmenu', 'stickyrice' ),
@@ -44,7 +45,7 @@ require 'lib/custom-post-types.php';
 	] );
 
 	// Enable support for editor styles
-	add_editor_style();
+	add_editor_style( 'editor-style.css' );
 }
 
 // Hook stickyrice into theme load
