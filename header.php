@@ -42,7 +42,7 @@
 		<div class="contain-width">
 			<<?php echo (is_front_page()) ? 'h1': 'p'; ?> class="masthead">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-					<span class="masthead__label"><?php echo get_bloginfo('name'); ?></span>
+					<span class="masthead__label"><?php echo esc_html( get_bloginfo('name') ); ?></span>
 					<span class="masthead__logo" aria-hidden="true"><?php echo logo(); ?></span>
 				</a>
 			</<?php echo (is_front_page()) ? 'h1': 'p'; ?>>
