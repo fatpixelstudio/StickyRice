@@ -18,6 +18,17 @@ This starter kit also assumes you'll be using some sort of critical css and an a
 
 If you're planning to use regular ``<link>`` and ``<script>`` tags loading these assets, feel free to do so! But you'll have to really dig into the header.php and the way it works.
 
+## Navigation
+
+The main navigation (`nav-main`) requires JavaScript to function. It uses `aria-expanded` on the toggle button and relies on JS to add/remove the `is-open-main-nav` class on the `<html>` element. Without JavaScript, the nav will remain visible (no toggle behavior).
+
+The JS hooks are:
+- `.js-nav-main-toggle` — the open/toggle button in the header
+- `.js-nav-main` — the `<nav>` element
+- `.js-nav-main-close` — the close button inside the nav
+
+See [NoodleSoup](https://github.com/fatpixel/fp-noodlesoup) for the reference JS implementation.
+
 ## Recommended plugins
 
 StickyRice works without any plugins, and you should use as little plugins as possible anyway. But there are some references to [Advanced Custom Fields](https://www.advancedcustomfields.com) in the code. Other than that, you're free to use what you want.
