@@ -53,3 +53,20 @@ function cc_mime_types($mimes)
 	return $mimes;
 }
 add_filter('upload_mimes', 'cc_mime_types');
+
+/**
+ * Remove the users endpoint from the REST API
+ * If a plugin needs to use the users endpoint, comment this block
+ */
+add_filter('rest_endpoints', function($endpoints) {
+	if (isset($endpoints['/wp/v2/users'])) {
+		unset($endpoints['/wp/v2/users']);
+	}
+	if (isset($endpoints['/wp/v2/users/(?P<id>[\d]+)'])) {
+		unset($endpoints['/wp/v2/users/(?P<id>[\d]+)']);
+	}
+	return $endpoints;
+});
+
+// disable XML-RPC
+add_filter( 'xmlrpc_enabled', '__return_false' );
