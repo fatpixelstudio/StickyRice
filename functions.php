@@ -9,6 +9,7 @@ Setting the basics, thumbnails, comments, load stuff
 require 'lib/stickyrice.php';
 require 'lib/sticky-helpers.php';
 require 'lib/sticky-defaults.php';
+require 'lib/sticky-roles-and-caps.php';
 require 'lib/sticky-icons.php';
 require 'lib/custom-post-types.php';
 
