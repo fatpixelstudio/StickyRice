@@ -9,6 +9,7 @@
 # Images should be treated as binary (don't apply end-of-line conversions)
 *.png                binary
 *.jpg                binary
+*.webp               binary
 
 # Exclude files from export (when using 'git archive' or Tower 'export')
 
@@ -19,6 +20,11 @@
 
 # Editor
 .editorconfig        export-ignore
+.claude/             export-ignore
+
+# Dependency workflow folders/files
+bin/                 export-ignore
+.github/             export-ignore
 
 # Readme (text files)
 # readme.txt           export-ignore
