@@ -99,3 +99,42 @@ function stickyrice_editor_hide_appearance_submenu() {
 	}
 }
 add_action( 'admin_menu', 'stickyrice_editor_hide_appearance_submenu', 999 );
+
+/**
+ * ----------------------------------------------------------------------------
+ * Let editors manage Gravity Forms forms and entries (if Gravity Forms exists)
+ * ----------------------------------------------------------------------------
+ *
+ * Editors can create, edit and delete forms and work with their entries, but
+ * not reach Gravity Forms' settings, add-ons, system status or uninstall.
+ * Granted at runtime instead of stored on the role, so nothing lingers in
+ * the database when Gravity Forms is removed.
+ */
+
+function stickyrice_editor_can_manage_gravityforms( $caps, $cap, $user_id, $args ) {
+	$gravityforms_caps = array(
+		'gravityforms_create_form',
+		'gravityforms_edit_forms',
+		'gravityforms_delete_forms',
+		'gravityforms_preview_forms',
+		'gravityforms_view_entries',
+		'gravityforms_edit_entries',
+		'gravityforms_delete_entries',
+		'gravityforms_export_entries',
+		'gravityforms_view_entry_notes',
+		'gravityforms_edit_entry_notes',
+	);
+
+	if ( ! in_array( $cap, $gravityforms_caps, true ) || ! class_exists( 'GFForms' ) ) {
+		return $caps;
+	}
+
+	$user = get_userdata( $user_id );
+
+	if ( ! $user || ! in_array( 'editor', (array) $user->roles, true ) ) {
+		return $caps;
+	}
+
+	return array( 'exist' );
+}
+add_filter( 'map_meta_cap', 'stickyrice_editor_can_manage_gravityforms', 10, 4 );
