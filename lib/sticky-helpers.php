@@ -28,7 +28,7 @@ function get_svg( string $filename, ?string $class = '' ) {
 
 
 /**
- * Return the environment suffix, subfolder and version from package.json based on the theme and environment
+ * Return the environment suffix and version from package.json based on the theme and environment
  */
 
 function sr_get_theme_data($theme_location = null, $staging_domain = null) {
@@ -42,19 +42,16 @@ function sr_get_theme_data($theme_location = null, $staging_domain = null) {
 
 	if(strpos($_SERVER['SERVER_NAME'],'local.') !== false || strpos($_SERVER['SERVER_NAME'],'.test') !== false || strpos($_SERVER['SERVER_NAME'],$staging_domain) !== false ) {
 		$env_suffix = '';
-		$subfolder = '';
 	}
 	else {
 		$env_suffix = '.min';
-		$subfolder = '';
 	}
 
-	$packagefile = file_get_contents( $_SERVER['DOCUMENT_ROOT'] . $subfolder . '/wp-content/themes/' . $theme_location . '/package.json' );
+	$packagefile = file_get_contents( get_theme_root() . '/' . $theme_location . '/package.json' );
 	$packagejson = json_decode( $packagefile, true );
 
 	return [
 		'env_suffix' => $env_suffix,
-		'subfolder' => $subfolder,
 		'version' => $packagejson['version'],
 	];
 }
