@@ -6,9 +6,23 @@ It's a very minimal theme, and is suited for the developer that wants to build f
 
 ## Styling and assets
 
-StickyRice assumes that you'll use stylesheets, javascript and other assets like in the [NoodleSoup](https://github.com/fatpixelstudio/NoodleSoup/) front-end starterkit.
+StickyRice has no styles or scripts of its own. It's built to be combined with the [NoodleSoup](https://github.com/fatpixelstudio/NoodleSoup/) front-end starterkit: copy the NoodleSoup files (`package.json`, `src/`, `dist/`, `assets/`, the webpack configs, etc.) into the root of the theme, run `yarn install` and you're good to go. Write your styles and scripts in `src/`. Webpack bundles them into `dist/`, which is what the theme loads.
 
-If you install this theme and find yourself baffled by the **StickyRice couldn't find your JSON hash files for CSS or JS** warning, it means that the CSS and JS assets (of NoodleSoup) couldn't be found.
+The theme expects these files:
+
+- `dist/main.css` and `dist/main.js`: the development bundles (`yarn start`).
+- `dist/main.min.css` and `dist/main.min.js`: the minified production bundles (`yarn build`).
+- `package.json`: its `version` is used for cache busting.
+- `assets/images/`: favicons, and the SVG's optimized by NoodleSoup in `assets/images/svg/`, which you can output inline with `get_svg( 'filename' )`.
+
+Which files are loaded is decided by `sr_get_theme_data()` in `lib/sticky-helpers.php`:
+
+- **Environment**: on a domain containing `local.` or `.test`, or on the staging domain (`fatpixel.dev`), it loads the unminified files. Everywhere else it loads the `.min` files. So make sure you've run `yarn build` before you deploy.
+- **Version**: the `version` from `package.json` is added as `?v=` to the CSS and JS URL. `yarn build` increments the patch version, so browsers get the new files after every build.
+
+If the page has no styling, or PHP warns it can't read `package.json`, the NoodleSoup files are missing or not built yet (or, on production, `yarn build` hasn't run). `package.json` is read from the theme folder via `get_theme_root()`, so this also works when WordPress lives in a subfolder.
+
+The block editor gets its own styles: `editor-style.css` (via `add_editor_style()` in `functions.php`) and `editor-blocks.css` (enqueued in `lib/stickyrice.php`). Both live in the theme root and aren't built by NoodleSoup.
 
 Classes on HTML elements are all in BEM notation. Javascript classes always start with ``js-``
 
