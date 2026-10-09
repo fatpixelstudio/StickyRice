@@ -5,6 +5,11 @@
 
 	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 
+	<!-- Inline head script: runs immediately, keep it tiny and above the stylesheets -->
+	<script>
+		document.documentElement.classList.replace('no-js', 'js');
+	</script>
+
 	<!-- Prefetch DNS lookups -->
 	<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
@@ -20,7 +25,7 @@
 
 	<!-- Scripts and Stylesheets -->
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri() . '/dist/main' . $theme_data['env_suffix'] . '.css?v='.$theme_data['version']; ?>" />
-	<script type="text/javascript" src="<?php echo get_template_directory_uri() . '/dist/head' . $theme_data['env_suffix'] . '.js'; ?>" async></script>
+	<script src="<?php echo get_template_directory_uri() . '/dist/main' . $theme_data['env_suffix'] . '.js?v=' . $theme_data['version']; ?>" defer></script>
 
 	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 

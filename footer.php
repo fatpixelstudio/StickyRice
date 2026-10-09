@@ -21,10 +21,6 @@
 		</footer>
 	</div>
 
-	<?php $theme_data = sr_get_theme_data(); ?>
-
-	<script src="<?php echo get_template_directory_uri() . '/dist/main' . $theme_data['env_suffix'] . '.js?v=' .$theme_data['version']; ?>" async></script>
-
 	<?php wp_footer(); ?>
 
 </body>
