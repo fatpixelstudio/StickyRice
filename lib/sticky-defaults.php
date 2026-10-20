@@ -16,14 +16,40 @@ add_filter( 'tiny_mce_before_init', function ( $settings ) {
 
 /**
  * Limit the upload size for non-administrators
+ * Images get a stricter limit than other files (video, PDF), so editors can't
+ * upload giant photos straight from the camera. Both limits are capped by the
+ * server's upload_max_filesize and post_max_size.
  */
+define( 'STICKY_UPLOAD_LIMIT_IMAGE', 4 * MB_IN_BYTES );
+define( 'STICKY_UPLOAD_LIMIT_FILE', 64 * MB_IN_BYTES );
+
 add_filter( 'upload_size_limit', function ( $size ) {
 	if ( ! current_user_can( 'manage_options' ) ) {
-		$size = 16 * 1024 * 1024;
+		$size = min( $size, STICKY_UPLOAD_LIMIT_FILE );
 	}
 
 	return $size;
 }, 20 );
+
+// The uploader only knows one limit, so images are checked separately here
+function sticky_limit_image_upload_size( $file ) {
+	if ( current_user_can( 'manage_options' ) || ! empty( $file['error'] ) ) {
+		return $file;
+	}
+
+	$filetype = wp_check_filetype( $file['name'] );
+
+	if ( $filetype['type'] && str_starts_with( $filetype['type'], 'image/' ) && $file['size'] > STICKY_UPLOAD_LIMIT_IMAGE ) {
+		$file['error'] = sprintf(
+			__( 'Afbeeldingen mogen maximaal %s zijn. Verklein de afbeelding en probeer het opnieuw.' ),
+			size_format( STICKY_UPLOAD_LIMIT_IMAGE )
+		);
+	}
+
+	return $file;
+}
+add_filter( 'wp_handle_upload_prefilter', 'sticky_limit_image_upload_size' );
+add_filter( 'wp_handle_sideload_prefilter', 'sticky_limit_image_upload_size' );
 
 /**
  * Make embeds responsive
