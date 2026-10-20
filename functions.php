@@ -79,33 +79,17 @@ add_action( 'after_setup_theme', 'stickyrice_cook' );
  * ----------------------------------------------------------------------------
  */
 
-// Thumbnail sizes
-add_image_size( 'content-width-full', 1024, 9999 );
-add_image_size( 'content-width-half', 512, 9999 );
-add_image_size( 'content-width-quarter', 256, 9999 );
-add_image_size( 'header-page', 2400, 1200, true );
-add_image_size( 'article-square', 800, 800, true );
-add_image_size( 'article-landscape', 1200, 800, true );
-add_image_size( 'article-portrait', 960, 1600, true );
-add_image_size( 'article-full', 2400, 1800, true );
-
 /*
-The function below adds the ability to use the dropdown menu to select
-the new images sizes you have just created above, from within the media manager
-when you add media to your content blocks.
+WordPress already generates thumbnail, medium, medium_large, large, 1536x1536
+and 2048x2048 for every upload, and uses them in srcset. Only add sizes the
+design actually needs, since every size is generated for every upload.
+
+Cropped sizes only end up in the same srcset when they share an aspect ratio,
+so add them in pairs: a large and a smaller version of the same crop.
 */
 
-// Hook custom image sizes to Wordpress
-add_filter( 'image_size_names_choose', 'stickyrice_custom_image_sizes' );
-
-// Image sizes in editor
-function stickyrice_custom_image_sizes( $sizes ) {
-	return array_merge( $sizes, array(
-		'content-width-full' => __('100% breed'),
-		'content-width-half' => __('50% breed'),
-		'content-width-quarter' => __('25% breed'),
-	) );
-}
+// add_image_size( 'header-page', 2400, 1200, true );
+// add_image_size( 'header-page-small', 1200, 600, true );
 
 /*
  * ----------------------------------------------------------------------------
